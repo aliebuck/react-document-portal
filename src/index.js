@@ -32,6 +32,8 @@ const DocumentPortal = forwardRef(({ as = "div", children = null }, ref) => {
   return node && createPortal(children, node);
 });
 
+DocumentPortal.displayName = "DocumentPortal";
+
 DocumentPortal.propTypes /* remove-proptypes */ = {
   as: PropTypes.string,
   children: PropTypes.node,
