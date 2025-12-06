@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/jacobbuck/react-document-portal.git"
+    "url": "git+ssh://git@github.com/aliebuck/react-document-portal.git"
   },
   "keywords": [
     "react",
@@ -28,12 +28,12 @@
     "body",
     "ssr"
   ],
-  "author": "Jacob Buck <buck.jacob@gmail.com>",
+  "author": "Alie Buck <830470+aliebuck@users.noreply.github.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jacobbuck/react-document-portal/issues"
+    "url": "https://github.com/aliebuck/react-document-portal/issues"
   },
-  "homepage": "https://github.com/jacobbuck/react-document-portal#readme",
+  "homepage": "https://github.com/aliebuck/react-document-portal#readme",
   "dependencies": {
     "prop-types": "^15.8.1"
   },
