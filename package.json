@@ -2,24 +2,6 @@
   "name": "react-document-portal",
   "version": "1.2.1",
   "description": "React component which renders its children inside a portal attached to the document.",
-  "main": "lib/index.cjs.js",
-  "module": "lib/index.esm.js",
-  "files": [
-    "lib"
-  ],
-  "scripts": {
-    "build": "rollup -c",
-    "coverage": "jest --coverage",
-    "format": "prettier --write .",
-    "lint": "eslint .",
-    "prepare": "npm run build && husky install",
-    "preversion": "npm run lint && npm run test",
-    "test": "jest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/aliebuck/react-document-portal.git"
-  },
   "keywords": [
     "react",
     "component",
@@ -28,23 +10,41 @@
     "body",
     "ssr"
   ],
-  "author": "Alie Buck <830470+aliebuck@users.noreply.github.com>",
-  "license": "MIT",
+  "homepage": "https://github.com/aliebuck/react-document-portal#readme",
   "bugs": {
     "url": "https://github.com/aliebuck/react-document-portal/issues"
   },
-  "homepage": "https://github.com/aliebuck/react-document-portal#readme",
-  "dependencies": {
-    "prop-types": "^15.8.1"
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/aliebuck/react-document-portal.git"
+  },
+  "license": "MIT",
+  "author": "Alie Buck <830470+aliebuck@users.noreply.github.com>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/react-document-portal.js",
+      "require": "./dist/react-document-portal.cjs"
+    }
+  },
+  "main": "./dist/react-document-portal.cjs",
+  "module": "./dist/react-document-portal.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "coverage": "jest --coverage",
+    "format": "prettier --write .",
+    "lint": "eslint .",
+    "prepare": "npm run build && husky install",
+    "test": "jest",
+    "preversion": "npm run lint && npm run test"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.9",
-    "@babel/preset-env": "^7.16.11",
-    "@babel/preset-react": "^7.16.7",
-    "@rollup/plugin-babel": "^5.3.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.1",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "@vitejs/plugin-react": "^5.1.1",
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-jest": "^26.1.4",
@@ -57,7 +57,7 @@
     "prettier": "^2.6.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "rollup": "^2.70.1"
+    "vite": "^7.2.6"
   },
   "peerDependencies": {
     "react": "^16.6.0 || 17 || 18",
