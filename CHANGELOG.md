@@ -1,5 +1,15 @@
 # Changelog
 
+## v1.3.0 - 2025-12-07
+
+### Changed
+
+- Updated [react](https://www.npmjs.com/package/react) and [react-dom](https://www.npmjs.com/package/react-dom) peer dependencies to support v19+.
+
+### Removed
+
+- Removed [prop-types](https://www.npmjs.com/package/prop-types) dependency.
+
 ## v1.2.1 - 2022-04-12
 
 ### Changed
@@ -14,7 +24,7 @@
 
 ### Changed
 
-- Updated [react](https://www.npmjs.com/package/react) and [react-dom](https://www.npmjs.com/package/react-dom) peer-dependencies to support v17 and v18.
+- Updated [react](https://www.npmjs.com/package/react) and [react-dom](https://www.npmjs.com/package/react-dom) peer dependencies to support v17 and v18.
 
 ### Removed
 
