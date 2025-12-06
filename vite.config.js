@@ -9,7 +9,7 @@ export default defineConfig({
       formats: ["es", "cjs"],
     },
     rollupOptions: {
-      external: ["prop-types", "react", "react-dom"],
+      external: ["react", "react-dom"],
     },
     sourcemap: true,
   },
