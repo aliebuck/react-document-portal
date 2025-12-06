@@ -1,8 +1,9 @@
 import * as React from 'react';
+import { expect, test, vi } from 'vitest';
 import updateRef from '../updateRef';
 
 test('handles function refs', () => {
-  const ref = jest.fn();
+  const ref = vi.fn();
   const value = { foo: 'bar' };
   updateRef(ref, value);
   expect(ref).toHaveBeenCalledWith(value);

@@ -2,23 +2,22 @@
   "env": {
     "browser": true,
     "es6": true,
-    "jest": true,
     "node": true
   },
   "extends": [
     "eslint:recommended",
-    "plugin:jest/recommended",
     "plugin:prettier/recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:@vitest/legacy-recommended"
   ],
   "parserOptions": {
     "ecmaFeatures": { "jsx": true },
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["jest", "prettier", "react", "react-hooks"],
+  "plugins": ["prettier", "react", "react-hooks", "@vitest"],
   "rules": {
     "prettier/prettier": ["error", { "singleQuote": true }],
     "react/display-name": "off"

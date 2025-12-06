@@ -1,16 +1,18 @@
-/**
- * @jest-environment jsdom
- */
+// @vitest-environment jsdom
 import { render, screen, waitFor } from '@testing-library/react';
 import { createRef } from 'react';
 import { renderToString } from 'react-dom/server';
+import { expect, test, vi } from 'vitest';
 import DocumentPortal from '..';
 import useBrowserLayoutEffect from '../useBrowserLayoutEffect';
 
-jest.mock('../useBrowserLayoutEffect', () => ({
-  __esModule: true,
-  default: jest.fn(jest.requireActual('../useBrowserLayoutEffect').default),
-}));
+vi.mock('../useBrowserLayoutEffect', async () => {
+  const actual = (await vi.importActual('../useBrowserLayoutEffect')).default;
+  return {
+    __esModule: true,
+    default: vi.fn(actual),
+  };
+});
 
 test('renders child inside portal', async () => {
   render(
@@ -73,7 +75,7 @@ test('uses `as` prop for portal container tagName', async () => {
 });
 
 test('updates function refs', async () => {
-  const ref = jest.fn();
+  const ref = vi.fn();
   const { unmount } = render(
     <DocumentPortal ref={ref}>
       <dialog data-testid="dialog">Hello!</dialog>
@@ -99,7 +101,7 @@ test('updates object refs', async () => {
 });
 
 test('handles changed ref', async () => {
-  const ref1 = jest.fn();
+  const ref1 = vi.fn();
   const { rerender } = render(
     <DocumentPortal ref={ref1}>
       <dialog data-testid="dialog">Hello!</dialog>
