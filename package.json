@@ -1,7 +1,7 @@
 {
   "name": "react-document-portal",
   "version": "1.2.1",
-  "description": "React component which renders its children inside a portal attached to the document.",
+  "description": "React component that renders its children inside a portal attached to the document.",
   "keywords": [
     "react",
     "component",
