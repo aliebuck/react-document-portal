@@ -1,34 +1,34 @@
 // @vitest-environment jsdom
-import { render, screen, waitFor } from '@testing-library/react';
-import { createRef } from 'react';
-import { renderToString } from 'react-dom/server';
-import { expect, test, vi } from 'vitest';
-import DocumentPortal from '..';
-import useBrowserLayoutEffect from '../useBrowserLayoutEffect';
+import { render, screen, waitFor } from "@testing-library/react";
+import { createRef } from "react";
+import { renderToString } from "react-dom/server";
+import { expect, test, vi } from "vitest";
+import DocumentPortal from "..";
+import useBrowserLayoutEffect from "../useBrowserLayoutEffect";
 
-vi.mock('../useBrowserLayoutEffect', async () => {
-  const actual = (await vi.importActual('../useBrowserLayoutEffect')).default;
+vi.mock("../useBrowserLayoutEffect", async () => {
+  const actual = (await vi.importActual("../useBrowserLayoutEffect")).default;
   return {
     __esModule: true,
     default: vi.fn(actual),
   };
 });
 
-test('renders child inside portal', async () => {
+test("renders child inside portal", async () => {
   render(
     <main data-testid="main">
       <DocumentPortal>
         <dialog data-testid="dialog">Hello!</dialog>
       </DocumentPortal>
-    </main>
+    </main>,
   );
-  const dialogElement = await screen.findByTestId('dialog');
-  expect(screen.getByTestId('main')).not.toContainElement(dialogElement);
+  const dialogElement = await screen.findByTestId("dialog");
+  expect(screen.getByTestId("main")).not.toContainElement(dialogElement);
   expect(dialogElement).toBeInTheDocument();
-  expect(dialogElement.parentNode.tagName).toBe('DIV');
+  expect(dialogElement.parentNode.tagName).toBe("DIV");
 });
 
-test('renders without children', async () => {
+test("renders without children", async () => {
   const ref = createRef();
   const { baseElement } = render(<DocumentPortal ref={ref} />);
   await waitFor(() => {
@@ -36,89 +36,89 @@ test('renders without children', async () => {
   });
 });
 
-test('appends element to document body element on mount', async () => {
+test("appends element to document body element on mount", async () => {
   const { baseElement } = render(
     <DocumentPortal>
       <dialog data-testid="dialog">Hello!</dialog>
-    </DocumentPortal>
+    </DocumentPortal>,
   );
-  const dialogElement = await screen.findByTestId('dialog');
+  const dialogElement = await screen.findByTestId("dialog");
   expect(baseElement.lastChild).toBe(await dialogElement.parentNode);
 });
 
-test('removes element from document body element unmount', async () => {
+test("removes element from document body element unmount", async () => {
   const { unmount } = render(
     <DocumentPortal>
       <dialog data-testid="dialog">Hello!</dialog>
-    </DocumentPortal>
+    </DocumentPortal>,
   );
-  const targetElement = await screen.findByTestId('dialog');
+  const targetElement = await screen.findByTestId("dialog");
   unmount();
   expect(targetElement).not.toBeInTheDocument();
 });
 
-test('uses `as` prop for portal container tagName', async () => {
+test("uses `as` prop for portal container tagName", async () => {
   const { rerender } = render(
     <DocumentPortal as="aside">
       <dialog data-testid="dialog">Hello!</dialog>
-    </DocumentPortal>
+    </DocumentPortal>,
   );
-  let dialogElement = await screen.findByTestId('dialog');
-  expect(dialogElement.parentNode.tagName).toBe('ASIDE');
+  let dialogElement = await screen.findByTestId("dialog");
+  expect(dialogElement.parentNode.tagName).toBe("ASIDE");
   rerender(
     <DocumentPortal as="span">
       <dialog data-testid="dialog">Hello!</dialog>
-    </DocumentPortal>
+    </DocumentPortal>,
   );
-  dialogElement = await screen.findByTestId('dialog');
-  expect(dialogElement.parentNode.tagName).toBe('SPAN');
+  dialogElement = await screen.findByTestId("dialog");
+  expect(dialogElement.parentNode.tagName).toBe("SPAN");
 });
 
-test('updates function refs', async () => {
+test("updates function refs", async () => {
   const ref = vi.fn();
   const { unmount } = render(
     <DocumentPortal ref={ref}>
       <dialog data-testid="dialog">Hello!</dialog>
-    </DocumentPortal>
+    </DocumentPortal>,
   );
-  const dialogElement = await screen.findByTestId('dialog');
+  const dialogElement = await screen.findByTestId("dialog");
   expect(ref).toHaveBeenLastCalledWith(dialogElement.parentNode);
   unmount();
   expect(ref).toHaveBeenLastCalledWith(null);
 });
 
-test('updates object refs', async () => {
+test("updates object refs", async () => {
   const ref = createRef();
   const { unmount } = render(
     <DocumentPortal ref={ref}>
       <dialog data-testid="dialog">Hello!</dialog>
-    </DocumentPortal>
+    </DocumentPortal>,
   );
-  const dialogElement = await screen.findByTestId('dialog');
+  const dialogElement = await screen.findByTestId("dialog");
   expect(ref.current).toBe(dialogElement.parentNode);
   unmount();
   expect(ref.current).toBe(null);
 });
 
-test('handles changed ref', async () => {
+test("handles changed ref", async () => {
   const ref1 = vi.fn();
   const { rerender } = render(
     <DocumentPortal ref={ref1}>
       <dialog data-testid="dialog">Hello!</dialog>
-    </DocumentPortal>
+    </DocumentPortal>,
   );
   const ref2 = createRef();
   rerender(
     <DocumentPortal ref={ref2}>
       <dialog data-testid="dialog">Hello!</dialog>
-    </DocumentPortal>
+    </DocumentPortal>,
   );
   expect(ref1).toHaveBeenLastCalledWith(null);
-  const dialogElement = await screen.findByTestId('dialog');
+  const dialogElement = await screen.findByTestId("dialog");
   expect(ref2.current).toBe(dialogElement.parentNode);
 });
 
-test('hydrates from server-side rendering', async () => {
+test("hydrates from server-side rendering", async () => {
   const TestComponent = () => (
     <main data-testid="main">
       <DocumentPortal>
@@ -131,12 +131,12 @@ test('hydrates from server-side rendering', async () => {
   useBrowserLayoutEffect.mockImplementationOnce(() => {});
   useBrowserLayoutEffect.mockImplementationOnce(() => {});
 
-  const container = document.createElement('div');
+  const container = document.createElement("div");
   container.innerHTML = renderToString(<TestComponent />);
   document.body.appendChild(container);
 
   render(<TestComponent />, { container, hydrate: true });
 
-  const dialogElement = await screen.findByTestId('dialog');
+  const dialogElement = await screen.findByTestId("dialog");
   expect(dialogElement).toBeInTheDocument();
 });

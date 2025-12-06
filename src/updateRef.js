@@ -1,8 +1,8 @@
 const updateRef = (ref, value) => {
-  if (typeof ref === 'function') {
+  if (typeof ref === "function") {
     ref(value);
   }
-  if (typeof ref === 'object' && ref !== null) {
+  if (typeof ref === "object" && ref !== null) {
     ref.current = value;
   }
 };

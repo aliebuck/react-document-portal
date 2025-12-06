@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
-import { forwardRef, useState } from 'react';
-import { createPortal } from 'react-dom';
-import updateRef from './updateRef';
-import useBrowserLayoutEffect from './useBrowserLayoutEffect';
+import PropTypes from "prop-types";
+import { forwardRef, useState } from "react";
+import { createPortal } from "react-dom";
+import updateRef from "./updateRef";
+import useBrowserLayoutEffect from "./useBrowserLayoutEffect";
 
-const DocumentPortal = forwardRef(({ as = 'div', children = null }, ref) => {
+const DocumentPortal = forwardRef(({ as = "div", children = null }, ref) => {
   const [node, setNode] = useState(null);
 
   useBrowserLayoutEffect(() => {
