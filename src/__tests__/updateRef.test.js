@@ -1,6 +1,6 @@
 import * as React from "react";
 import { expect, test, vi } from "vitest";
-import updateRef from "../updateRef";
+import { updateRef } from "../updateRef";
 
 test("handles function refs", () => {
   const ref = vi.fn();

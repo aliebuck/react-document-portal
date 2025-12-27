@@ -1,7 +1,7 @@
 import { forwardRef, useState } from "react";
 import { createPortal } from "react-dom";
-import updateRef from "./updateRef";
-import useBrowserLayoutEffect from "./useBrowserLayoutEffect";
+import { updateRef } from "./updateRef";
+import { useBrowserLayoutEffect } from "./useBrowserLayoutEffect";
 
 /**
  * React component that renders its children into a portal attached to the
@@ -35,9 +35,7 @@ const DocumentPortal = forwardRef(({ as = "div", children = null }, ref) => {
   useBrowserLayoutEffect(() => {
     if (ref) {
       updateRef(ref, node);
-      return () => {
-        updateRef(ref, null);
-      };
+      return () => updateRef(ref, null);
     }
   }, [node, ref]);
 

@@ -4,7 +4,7 @@
  * @param {import("react").Ref<any>} ref - The React ref to update.
  * @param {any} value - The value to assign to the ref.
  */
-const updateRef = (ref, value) => {
+export const updateRef = (ref, value) => {
   if (typeof ref === "function") {
     ref(value);
   }
@@ -12,5 +12,3 @@ const updateRef = (ref, value) => {
     ref.current = value;
   }
 };
-
-export default updateRef;

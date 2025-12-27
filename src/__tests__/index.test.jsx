@@ -4,15 +4,6 @@ import { createRef } from "react";
 import { renderToString } from "react-dom/server";
 import { expect, test, vi } from "vitest";
 import DocumentPortal from "..";
-import useBrowserLayoutEffect from "../useBrowserLayoutEffect";
-
-vi.mock("../useBrowserLayoutEffect", async () => {
-  const actual = (await vi.importActual("../useBrowserLayoutEffect")).default;
-  return {
-    __esModule: true,
-    default: vi.fn(actual),
-  };
-});
 
 test("renders child inside portal", async () => {
   render(
@@ -119,6 +110,10 @@ test("handles changed ref", async () => {
 });
 
 test("hydrates from server-side rendering", async () => {
+  vi.doMock("../useBrowserLayoutEffect", () => ({
+    useBrowserLayoutEffect: vi.fn(),
+  }));
+
   const TestComponent = () => (
     <main data-testid="main">
       <DocumentPortal>
@@ -127,13 +122,11 @@ test("hydrates from server-side rendering", async () => {
     </main>
   );
 
-  useBrowserLayoutEffect.mockImplementationOnce(() => {});
-  useBrowserLayoutEffect.mockImplementationOnce(() => {});
-  useBrowserLayoutEffect.mockImplementationOnce(() => {});
-
   const container = document.createElement("div");
   container.innerHTML = renderToString(<TestComponent />);
   document.body.appendChild(container);
+
+  vi.doUnmock("../useBrowserLayoutEffect");
 
   render(<TestComponent />, { container, hydrate: true });
 
